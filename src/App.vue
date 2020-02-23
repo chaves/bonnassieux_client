@@ -43,7 +43,6 @@
       >
         <v-row>
           <v-col>
-
             <router-view/>
           </v-col>
         </v-row>
@@ -59,27 +58,9 @@
 </template>
 
 <script>
-
-export default {
-  name: 'App',
-
-  methods: {
-
-    getCities: function(city) {
-      window.axios
-        .get('cities/search/' + city)
-        .then(response => {
-          console.log(response.data)
-          this.cities = response.data;
-          });
-    }
-  },
-
-  data: () => ({
-    drawer: null,
-    cities: [],
-    selected_cities: [],
-    selected_city: null,
-  }),
-};
+  export default {
+    data: () => ({
+      drawer: null
+    })
+  }
 </script>

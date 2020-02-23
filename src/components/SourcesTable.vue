@@ -53,12 +53,22 @@
               rows="3"
               auto-grow>
             </v-textarea>
-          </v-col>
-          <v-col cols="12" md="6">
             <domains-list
               :source="item.source"
               :industries="industries"
             />
+          </v-col>
+          <v-col cols="12" md="3">
+fdsfsd
+          </v-col>
+          <v-col cols="12" md="3">
+            <city-autocomplete :source_id="item.id" @setSelectedCity="setSelectedCity" />
+
+            {{selected_city}}
+            <v-chip v-for="city in item.cities" :key="city.id" class="ma-2"
+            >
+            {{ city.city }}
+            </v-chip>
           </v-col>
         </v-row>
 
@@ -71,17 +81,20 @@
 
 <script>
 import highlightSource from "./parts/highlightSource";
-import domainsList from "./parts/domainsList"
+import domainsList from "./parts/domainsList";
+import cityAutocomplete from "./parts/cityAutocomplete";
+
 export default {
   props: ["sources", "industries", "valid"],
   data: () => ({
     search: '',
     pagination: {},
-    source_saved: false,
+    selected_city:''
   }),
   components: {
     "highlight-source": highlightSource,
-    "domains-list": domainsList
+    "domains-list": domainsList,
+    "city-autocomplete": cityAutocomplete
   },
   computed: {
     headers() {
@@ -105,6 +118,10 @@ export default {
         .post(`sources/${id}/validate`, {'validated':validated})
         .then()
         .catch();
+    },
+    setSelectedCity(selected) {
+      this.selected_city = selected;
+
     }
   }
 };
