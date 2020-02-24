@@ -10,13 +10,13 @@ export default new Vuetify({
       light: {
         primary: colors.red.darken1,
         secondary: colors.red.lighten4,
-        chipVille: colors.purple.lighten3,
-        backSearchVille: colors.purple.lighten5
+        chipVille: colors.blueGrey.lighten5
       },
       dark: {
         primary: colors.red.darken1,
         secondary: colors.red.lighten4,
-        chipVille: colors.purple.darken4
+        bars: "#b1040e",
+        chipVille: colors.blueGrey.darken3
       }
     }
   }

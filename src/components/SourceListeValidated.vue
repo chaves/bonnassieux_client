@@ -2,7 +2,7 @@
 <v-container>
     <v-layout row wrap>
       <v-flex>
-        <sources-table :sources="sources" :industries="industries"/>
+        <sources-table :sources="sources" :industries="industries" :domains="domains" />
       </v-flex>
     </v-layout>
   </v-container>
@@ -16,6 +16,7 @@ export default {
   data: () => ({
     sources: [],
     industries: [],
+    domains: [],
     pagination: {},
     page: 1,
     panel: []
@@ -26,9 +27,7 @@ export default {
   mounted() {
     this.getAjax();
   },
-
   methods: {
-
     getAjax: function() {
       window.axios
         .get('sources/validated')
@@ -37,9 +36,12 @@ export default {
       window.axios
         .get('industries')
         .then(response => this.industries = response.data);
+
+      window.axios
+        .get('domains')
+        .then(response => this.domains = response.data);
     }
   }
-  
 }
 
 </script>

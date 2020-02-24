@@ -29,7 +29,7 @@
 
     <v-app-bar
       app
-      color="indigo"
+      color="#b1040e"
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />

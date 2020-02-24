@@ -17,7 +17,7 @@
     <div class="selected_city">
       <v-chip v-if="city_selected"
           class="mr-2"
-          color="chipVille"
+          color="#b1040e"
           dark
           @click="saveCity()"
         >
@@ -32,7 +32,7 @@
         v-for="city in cities_list" 
         :key="city.code" 
         class="ma-2"
-        color="chipVille"
+        color="#546E7A"
         dark
       >
         {{ city.city }}

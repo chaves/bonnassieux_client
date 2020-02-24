@@ -59,11 +59,12 @@
             />
           </v-col>
           <v-col cols="12" md="3">
-            <h3 class="text-center">Localization/cities</h3>
+            <h3 class="text-center villes">Localization/cities</h3>
             <city-autocomplete :source_id="item.id" :cities_source="item.cities" />
           </v-col>
           <v-col cols="12" md="3">
             <h3 class="text-center">Industries</h3>
+            <domain-select :source_id="item.id" :domains="domains" :domains_source="item.domains" />
           </v-col>
           <v-col cols="12" md="3">
             <h3 class="text-center">Actors</h3>
@@ -81,9 +82,10 @@
 import highlightSource from "./parts/highlightSource";
 import domainsList from "./parts/domainsList";
 import cityAutocomplete from "./parts/cityAutocomplete";
+import domainSelect from "./parts/domainSelect";
 
 export default {
-  props: ["sources", "industries", "valid"],
+  props: ["sources", "industries", "domains"],
   data: () => ({
     search: '',
     pagination: {}
@@ -91,7 +93,8 @@ export default {
   components: {
     "highlight-source": highlightSource,
     "domains-list": domainsList,
-    "city-autocomplete": cityAutocomplete
+    "city-autocomplete": cityAutocomplete,
+    "domain-select": domainSelect
   },
   computed: {
     headers() {
@@ -119,3 +122,7 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+</style>
