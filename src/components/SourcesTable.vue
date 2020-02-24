@@ -43,7 +43,7 @@
     <template #expanded-item="{headers, item}">
       <td :colspan="headers.length">
         <v-row>
-          <v-col cols="12" md="6">
+          <v-col cols="12" md="3">
             <v-textarea 
               slot="input" 
               v-model="item.source"
@@ -59,16 +59,14 @@
             />
           </v-col>
           <v-col cols="12" md="3">
-fdsfsd
+            <h3 class="text-center">Localization/cities</h3>
+            <city-autocomplete :source_id="item.id" :cities_source="item.cities" />
           </v-col>
           <v-col cols="12" md="3">
-            <city-autocomplete :source_id="item.id" @setSelectedCity="setSelectedCity" />
-
-            {{selected_city}}
-            <v-chip v-for="city in item.cities" :key="city.id" class="ma-2"
-            >
-            {{ city.city }}
-            </v-chip>
+            <h3 class="text-center">Industries</h3>
+          </v-col>
+          <v-col cols="12" md="3">
+            <h3 class="text-center">Actors</h3>
           </v-col>
         </v-row>
 
@@ -88,8 +86,7 @@ export default {
   props: ["sources", "industries", "valid"],
   data: () => ({
     search: '',
-    pagination: {},
-    selected_city:''
+    pagination: {}
   }),
   components: {
     "highlight-source": highlightSource,
@@ -118,10 +115,6 @@ export default {
         .post(`sources/${id}/validate`, {'validated':validated})
         .then()
         .catch();
-    },
-    setSelectedCity(selected) {
-      this.selected_city = selected;
-
     }
   }
 };
