@@ -46,20 +46,20 @@
           <v-col cols="12" md="6">
             <v-card>
               <v-card-text>
-                      <v-textarea 
-                        slot="input" 
-                        v-model="item.source"
-                        v-on:change="updateSourceText(item.id, item.source)"
-                        dense 
-                        filled
-                        rows="3"
-                        background-color="#FAFAFA"
-                        auto-grow>
-                      </v-textarea>
-                      <domains-list
-                        :source="item.source"
-                        :industries="industries"
-                      />
+                <v-textarea 
+                  slot="input" 
+                  v-model="item.source"
+                  v-on:change="updateSourceText(item.id, item.source)"
+                  dense 
+                  filled
+                  rows="3"
+                  background-color="#FAFAFA"
+                  auto-grow>
+                </v-textarea>
+                <domains-list
+                  :source="item.source"
+                  :industries="industries"
+                />
               </v-card-text>
             </v-card>
           </v-col>

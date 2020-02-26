@@ -96,7 +96,7 @@ export default {
 
       this.isLoading = true
       // Lazily load input items
-      fetch('http://bonnassieux_serveur.test/api/matters')
+      fetch('http://bonnassieux_serveur.test/api/matters/search/' + val)
         .then(res => res.json())
         .then(res => {
           this.matters = res;

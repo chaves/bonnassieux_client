@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 
 import SourceListe from "@/components/SourceListe";
 import SourceListeValidated from "@/components/SourceListeValidated";
+import DictionaryCities from "@/components/dictionnaries/DictionaryCities";
 import DictionaryIndustries from "@/components/dictionnaries/DictionaryIndustries";
 import DictionaryPersons from "@/components/dictionnaries/DictionaryPersons";
 import DictionaryGroups from "@/components/dictionnaries/DictionaryGroups";
@@ -18,6 +19,10 @@ const routes = [
   {
     path: "/valides",
     component: SourceListeValidated
+  },
+  {
+    path: "/cities",
+    component: DictionaryCities
   },
   {
     path: "/industries",

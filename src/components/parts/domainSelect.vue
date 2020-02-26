@@ -5,7 +5,7 @@
       <v-select
         v-model="value"
         :items="domains"
-        item-text="domain"
+        item-text="name"
         item-value="id"
         dense
         chips
@@ -21,7 +21,7 @@
             @click="saveDomain()"
           >
             <v-icon left>save</v-icon>
-            {{domain_selected.domain}}
+            {{domain_selected.name}}
         </v-chip>
       </div>
 
@@ -34,7 +34,7 @@
           color="#616161"
           dark
         >
-          {{ domain.domain }}
+          {{ domain.name }}
         </v-chip>
       </div>
 
@@ -71,7 +71,7 @@ export default {
       window.axios
         .post('sources/domain/store', {'domain_id': this.domain_selected.id, 'source_id':this.source_id})
         .then(() => {
-          this.domains_list = this.domains_list.concat({'id': this.domain_selected.id, 'domain': this.domain_selected.domain});
+          this.domains_list = this.domains_list.concat({'id': this.domain_selected.id, 'name': this.domain_selected.name});
           this.value = [];
         })
         .catch(err => {

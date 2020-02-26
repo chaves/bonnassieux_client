@@ -29,6 +29,15 @@
       <h5 class="mt-3 ml-5">Dictionaries</h5>
       <v-list dense>
 
+        <v-list-item link to="/cities">
+          <v-list-item-action>
+            <v-icon>mdi-city-variant</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Cities</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item link to="/industries">
           <v-list-item-action>
             <v-icon>mdi-factory</v-icon>

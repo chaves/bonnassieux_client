@@ -15,7 +15,7 @@ export default {
 
   mounted() {
     window.axios
-      .get('domains')
+      .get('domains/counts')
       .then(response => this.domains = response.data);
   },
   methods: {

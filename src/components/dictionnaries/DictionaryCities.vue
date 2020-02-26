@@ -1,8 +1,8 @@
 <template>
   <v-row>
     <v-col cols="12" md="6">
-      <div>Cases</div>
-      {{matters}}
+      <div>Cities</div>
+      {{cities}}
     </v-col>
   </v-row>
 </template>
@@ -10,13 +10,13 @@
 <script>
 export default {
   data: () => ({
-    matters: [],
+    cities: [],
   }),
 
   mounted() {
     window.axios
-      .get('matters/counts')
-      .then(response => this.matters = response.data);
+      .get('cities/counts')
+      .then(response => this.cities = response.data);
   },
   methods: {
 

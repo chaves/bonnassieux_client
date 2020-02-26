@@ -8,7 +8,7 @@ export default {
   methods: {
     highlight: function(source, industries) {
       industries.map(function(value) {
-        const regex = RegExp('(\\b'+ value.industry +'[s]?\\b)', "igm");
+        const regex = RegExp('(\\b'+ value.name +'[s]?\\b)', "igm");
         source = source.replace(
           regex,
           match => {

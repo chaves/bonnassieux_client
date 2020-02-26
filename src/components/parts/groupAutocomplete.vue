@@ -96,7 +96,7 @@ export default {
 
       this.isLoading = true
       // Lazily load input items
-      fetch('http://bonnassieux_serveur.test/api/groups')
+      fetch('http://bonnassieux_serveur.test/api/groups/search/' + val)
         .then(res => res.json())
         .then(res => {
           this.groups = res;

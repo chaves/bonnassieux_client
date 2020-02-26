@@ -15,7 +15,7 @@ export default {
 
   mounted() {
     window.axios
-      .get('persons')
+      .get('persons/counts')
       .then(response => this.persons = response.data);
   },
   methods: {

@@ -12,7 +12,7 @@ export default {
   computed: {
       domains: function() {
       return (this.industries.filter(value => {
-        const regex = RegExp('(\\b'+ value.industry +'[s]?\\b)', "igm");
+        const regex = RegExp('(\\b'+ value.name +'[s]?\\b)', "igm");
         return this.source.match(regex);
       }))
     }

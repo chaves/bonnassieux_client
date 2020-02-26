@@ -37,7 +37,7 @@
           color="#616161"
           dark
         >
-          {{ city.city }}
+          {{ city.name }}
         </v-chip>
       </div>
 
@@ -90,7 +90,7 @@ export default {
       window.axios
         .post('sources/city/store', {'city_id': this.city_selected.code, 'source_id':this.source_id})
         .then(() => {
-          this.cities_list = this.cities_list.concat({'id': this.city_selected.code, 'city': this.city_selected.nom});
+          this.cities_list = this.cities_list.concat({'id': this.city_selected.code, 'name': this.city_selected.nom});
           this.values = null;
         })
         .catch(err => {

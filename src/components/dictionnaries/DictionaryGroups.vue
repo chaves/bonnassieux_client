@@ -14,9 +14,9 @@ export default {
   }),
 
   mounted() {
-      window.axios
-        .get('groups')
-        .then(response => this.groups = response.data);
+    window.axios
+      .get('groups/counts')
+      .then(response => this.groups = response.data);
   },
   methods: {
 
