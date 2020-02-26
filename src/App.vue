@@ -89,7 +89,6 @@
 
     <v-content>
       <v-container
-        class="fill-height"
         fluid
       >
         <v-row>

@@ -95,7 +95,7 @@ export default {
 
       this.isLoading = true
       // Lazily load input items
-      fetch('http://bonnassieux_serveur.test/api/persons/search/' + val)
+      fetch(process.env.VUE_APP_API_URL+ 'persons/search/' + val)
         .then(res => res.json())
         .then(res => {
           this.persons = res;

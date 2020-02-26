@@ -39,7 +39,7 @@ export default {
   },
   mounted() {
     window.axios
-      .get('persons/counts')
+      .get('groups/counts')
       .then(response => this.groups = response.data);
   },
   methods: {

@@ -11,7 +11,7 @@ window.axios = require("axios");
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
-// console.log(axios.defaults.baseURL);
+console.log(axios.defaults.baseURL);
 
 new Vue({
   vuetify,
