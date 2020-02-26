@@ -32,7 +32,7 @@
         v-for="city in cities_list" 
         :key="city.code" 
         class="ma-2"
-        color="#546E7A"
+        color="#616161"
         dark
       >
         {{ city.city }}

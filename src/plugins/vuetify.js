@@ -16,7 +16,7 @@ export default new Vuetify({
         primary: colors.red.darken1,
         secondary: colors.red.lighten4,
         bars: "#b1040e",
-        chipVille: colors.blueGrey.darken3
+        chipVille: colors.grey.darken4
       }
     }
   }

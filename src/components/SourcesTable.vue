@@ -79,7 +79,7 @@
             <v-text-field
               v-model="item.ref_id"
               single-line
-              v-on:change="updateRefId(ref)"
+              v-on:change="updateRefId(item.ref_id)"
             ></v-text-field>
           </v-col>
 
@@ -155,9 +155,9 @@ export default {
         .then()
         .catch();
     },
-    updateRefId(ref) {
+    updateRefId(ref_id) {
       window.axios
-        .post(`sources/ref_id/${this.source_id}/update`, {'ref_id': ref})
+        .post(`sources/ref_id/${this.source_id}/update`, {'ref_id': ref_id})
         .then()
         .catch();
     }

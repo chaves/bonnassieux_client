@@ -29,7 +29,7 @@
         v-for="domain in domains_list" 
         :key="domain.id" 
         class="ma-2"
-        color="#546E7A"
+        color="#616161"
         dark
       >
         {{ domain.domain }}

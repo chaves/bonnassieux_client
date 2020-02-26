@@ -32,7 +32,7 @@
         v-for="group in groups_list" 
         :key="group.id" 
         class="ma-2"
-        color="#546E7A"
+        color="#616161"
         dark
       >
         {{ group.name }}

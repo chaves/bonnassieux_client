@@ -32,7 +32,7 @@
         v-for="matter in matters_list" 
         :key="matter.id" 
         class="ma-2"
-        color="#546E7A"
+        color="#616161"
         dark
       >
         {{ matter.name }}

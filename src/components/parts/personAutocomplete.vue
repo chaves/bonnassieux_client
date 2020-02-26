@@ -32,7 +32,7 @@
         v-for="person in persons_list" 
         :key="person.id" 
         class="ma-2"
-        color="#546E7A"
+        color="#616161"
         dark
       >
         {{ person.name }}
