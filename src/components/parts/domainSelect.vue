@@ -1,42 +1,45 @@
 <template>
-  <v-card-text>
-    <v-select
-      v-model="value"
-      :items="domains"
-      item-text="domain"
-      item-value="id"
-      dense
-      chips
-      small-chips
-    ></v-select>
+  <v-card>
+    <v-card-title>Industries</v-card-title>
+    <v-card-text>
+      <v-select
+        v-model="value"
+        :items="domains"
+        item-text="domain"
+        item-value="id"
+        dense
+        chips
+        small-chips
+      ></v-select>
 
-    <!-- domaines séléctionnés -->
-    <div class="domain_selected">
-      <v-chip v-if="domain_selected"
-          class="mr-2"
-          color="#b1040e"
+      <!-- domaines séléctionnés -->
+      <div class="domain_selected">
+        <v-chip v-if="domain_selected"
+            class="mr-2"
+            color="#b1040e"
+            dark
+            @click="saveDomain()"
+          >
+            <v-icon left>save</v-icon>
+            {{domain_selected.domain}}
+        </v-chip>
+      </div>
+
+      <!-- lite des villes séléctionnées -->
+      <div class="domains_list">
+        <v-chip 
+          v-for="domain in domains_list" 
+          :key="domain.id" 
+          class="ma-2"
+          color="#616161"
           dark
-          @click="saveDomain()"
         >
-          <v-icon left>save</v-icon>
-          {{domain_selected.domain}}
-      </v-chip>
-    </div>
+          {{ domain.domain }}
+        </v-chip>
+      </div>
 
-    <!-- lite des villes séléctionnées -->
-    <div class="domains_list">
-      <v-chip 
-        v-for="domain in domains_list" 
-        :key="domain.id" 
-        class="ma-2"
-        color="#616161"
-        dark
-      >
-        {{ domain.domain }}
-      </v-chip>
-    </div>
-
-  </v-card-text>  
+    </v-card-text>
+  </v-card> 
 </template>
 
 

@@ -14,7 +14,6 @@
             </v-list-item-content>
           </v-list-item>
 
-
           <v-list-item link to="/valides">
             <v-list-item-action>
               <v-icon>check_circle</v-icon>
@@ -25,6 +24,49 @@
           </v-list-item>
 
       </v-list>
+
+      <v-divider></v-divider>
+      <h5 class="mt-3 ml-5">Dictionaries</h5>
+      <v-list dense>
+
+        <v-list-item link to="/industries">
+          <v-list-item-action>
+            <v-icon>mdi-factory</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Industries</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link to="/persons">
+          <v-list-item-action>
+            <v-icon>mdi-account-tie</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Persons</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link to="/groups">
+          <v-list-item-action>
+            <v-icon>mdi-account-group</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Groups</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link to="/cases">
+          <v-list-item-action>
+            <v-icon>mdi-briefcase</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Case types</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+      </v-list>
+
     </v-navigation-drawer>
 
     <v-app-bar

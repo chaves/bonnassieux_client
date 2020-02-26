@@ -1,45 +1,48 @@
 <template>
-  <v-card-text>
-    <v-autocomplete
-      v-model="values"
-      :items="cities"
-      item-text="nom"
-      item-value="code"
-      :search-input.sync="search"
-      cache-items
-      dense
-      chips
-      small-chips
-      background-color="backSearchVille"
-    ></v-autocomplete>
+  <v-card>
+    <v-card-title>Localization/cities</v-card-title>
+    <v-card-text>
+      <v-autocomplete
+        v-model="values"
+        :items="cities"
+        item-text="nom"
+        item-value="code"
+        :search-input.sync="search"
+        cache-items
+        dense
+        chips
+        small-chips
+        background-color="backSearchVille"
+      ></v-autocomplete>
 
-    <!-- villes séléctionnée -->
-    <div class="selected_city">
-      <v-chip v-if="city_selected"
-          class="mr-2"
-          color="#b1040e"
+      <!-- villes séléctionnée -->
+      <div class="selected_city">
+        <v-chip v-if="city_selected"
+            class="mr-2"
+            color="#b1040e"
+            dark
+            @click="saveCity()"
+          >
+            <v-icon left>save</v-icon>
+            {{city_selected.nom}} | {{ departement }} | {{ region }}
+        </v-chip>
+      </div>
+
+      <!-- lite des villes séléctionnées -->
+      <div class="cities_list">
+        <v-chip 
+          v-for="city in cities_list" 
+          :key="city.code" 
+          class="ma-2"
+          color="#616161"
           dark
-          @click="saveCity()"
         >
-          <v-icon left>save</v-icon>
-          {{city_selected.nom}} | {{ departement }} | {{ region }}
-      </v-chip>
-    </div>
+          {{ city.city }}
+        </v-chip>
+      </div>
 
-    <!-- lite des villes séléctionnées -->
-    <div class="cities_list">
-      <v-chip 
-        v-for="city in cities_list" 
-        :key="city.code" 
-        class="ma-2"
-        color="#616161"
-        dark
-      >
-        {{ city.city }}
-      </v-chip>
-    </div>
-
-  </v-card-text>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>

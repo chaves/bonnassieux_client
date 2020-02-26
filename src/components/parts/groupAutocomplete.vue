@@ -1,45 +1,48 @@
 <template>
-  <v-card-text>
-    <v-autocomplete
-      v-model="values"
-      :items="groups"
-      item-text="name"
-      item-value="id"
-      :search-input.sync="search"
-      cache-items
-      dense
-      chips
-      small-chips
-      background-color="backSearchVille"
-    ></v-autocomplete>
+  <v-card>
+    <v-card-title>Groups</v-card-title>
+    <v-card-text>
+      <v-autocomplete
+        v-model="values"
+        :items="groups"
+        item-text="name"
+        item-value="id"
+        :search-input.sync="search"
+        cache-items
+        dense
+        chips
+        small-chips
+        background-color="backSearchVille"
+      ></v-autocomplete>
 
-    <!-- villes séléctionnée -->
-    <div class="selected_group">
-      <v-chip v-if="group_selected"
-          class="mr-2"
-          color="#b1040e"
+      <!-- villes séléctionnée -->
+      <div class="selected_group">
+        <v-chip v-if="group_selected"
+            class="mr-2"
+            color="#b1040e"
+            dark
+            @click="savegroup()"
+          >
+            <v-icon left>save</v-icon>
+            {{group_selected.name}}
+        </v-chip>
+      </div>
+
+      <!-- lite des villes séléctionnées -->
+      <div class="groups_list">
+        <v-chip 
+          v-for="group in groups_list" 
+          :key="group.id" 
+          class="ma-2"
+          color="#616161"
           dark
-          @click="savegroup()"
         >
-          <v-icon left>save</v-icon>
-          {{group_selected.name}}
-      </v-chip>
-    </div>
+          {{ group.name }}
+        </v-chip>
+      </div>
 
-    <!-- lite des villes séléctionnées -->
-    <div class="groups_list">
-      <v-chip 
-        v-for="group in groups_list" 
-        :key="group.id" 
-        class="ma-2"
-        color="#616161"
-        dark
-      >
-        {{ group.name }}
-      </v-chip>
-    </div>
-
-  </v-card-text>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>

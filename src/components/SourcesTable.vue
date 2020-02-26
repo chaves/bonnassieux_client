@@ -44,29 +44,31 @@
       <td :colspan="headers.length">
         <v-row>
           <v-col cols="12" md="6">
-            <v-textarea 
-              slot="input" 
-              v-model="item.source"
-              v-on:change="updateSourceText(item.id, item.source)"
-              dense 
-              filled
-              rows="3"
-              background-color="#FFEBEE"
-              auto-grow>
-            </v-textarea>
-            <domains-list
-              :source="item.source"
-              :industries="industries"
-            />
+            <v-card>
+              <v-card-text>
+                      <v-textarea 
+                        slot="input" 
+                        v-model="item.source"
+                        v-on:change="updateSourceText(item.id, item.source)"
+                        dense 
+                        filled
+                        rows="3"
+                        background-color="#FAFAFA"
+                        auto-grow>
+                      </v-textarea>
+                      <domains-list
+                        :source="item.source"
+                        :industries="industries"
+                      />
+              </v-card-text>
+            </v-card>
           </v-col>
 
           <v-col cols="12" md="3">
-            <h3 class="text-center villes">Localization/cities</h3>
             <city-autocomplete :source_id="item.id" :cities_source="item.cities" />
           </v-col>
 
           <v-col cols="12" md="3">
-            <h3 class="text-center">Industries</h3>
             <domain-select :source_id="item.id" :domains="domains" :domains_source="item.domains" />
           </v-col>
 
@@ -75,26 +77,27 @@
         <v-row>
           
           <v-col cols="12" md="3">
-            <h3 class="text-center">Reference</h3>
-            <v-text-field
-              v-model="item.ref_id"
-              single-line
-              v-on:change="updateRefId(item.ref_id)"
-            ></v-text-field>
+            <v-card>
+              <v-card-title>Reference</v-card-title>
+              <v-card-text>
+                <v-text-field
+                  v-model="item.ref_id"
+                  single-line
+                  v-on:change="updateRefId(item.ref_id)"
+                ></v-text-field>
+              </v-card-text>
+            </v-card>
           </v-col>
 
           <v-col cols="12" md="3">
-            <h3 class="text-center">Persons</h3>
             <person-autocomplete :source_id="item.id" :persons_source="item.persons" />
           </v-col>
 
           <v-col cols="12" md="3">
-            <h3 class="text-center">Groups</h3>
             <group-autocomplete :source_id="item.id" :groups_source="item.groups" />
           </v-col>
 
           <v-col cols="12" md="3">
-            <h3 class="text-center">Case type</h3>
             <matter-autocomplete :source_id="item.id" :matters_source="item.matters" />
           </v-col>
           
@@ -165,6 +168,12 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style>
+.v-card__title {
+  font-size: 1.1rem;
+  line-height: 1.5rem;
+  padding: 12px;
+  padding-bottom: 0;
+  text-align: center;
+}
 </style>

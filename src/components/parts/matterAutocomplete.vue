@@ -1,45 +1,48 @@
 <template>
-  <v-card-text>
-    <v-autocomplete
-      v-model="values"
-      :items="matters"
-      item-text="name"
-      item-value="id"
-      :search-input.sync="search"
-      cache-items
-      dense
-      chips
-      small-chips
-      background-color="backSearchVille"
-    ></v-autocomplete>
+  <v-card>
+    <v-card-title>Case types</v-card-title>
+    <v-card-text>
+      <v-autocomplete
+        v-model="values"
+        :items="matters"
+        item-text="name"
+        item-value="id"
+        :search-input.sync="search"
+        cache-items
+        dense
+        chips
+        small-chips
+        background-color="backSearchVille"
+      ></v-autocomplete>
 
-    <!-- villes séléctionnée -->
-    <div class="selected_matter">
-      <v-chip v-if="matter_selected"
-          class="mr-2"
-          color="#b1040e"
+      <!-- villes séléctionnée -->
+      <div class="selected_matter">
+        <v-chip v-if="matter_selected"
+            class="mr-2"
+            color="#b1040e"
+            dark
+            @click="savematter()"
+          >
+            <v-icon left>save</v-icon>
+            {{matter_selected.name}}
+        </v-chip>
+      </div>
+
+      <!-- lite des villes séléctionnées -->
+      <div class="matters_list">
+        <v-chip 
+          v-for="matter in matters_list" 
+          :key="matter.id" 
+          class="ma-2"
+          color="#616161"
           dark
-          @click="savematter()"
         >
-          <v-icon left>save</v-icon>
-          {{matter_selected.name}}
-      </v-chip>
-    </div>
+          {{ matter.name }}
+        </v-chip>
+      </div>
 
-    <!-- lite des villes séléctionnées -->
-    <div class="matters_list">
-      <v-chip 
-        v-for="matter in matters_list" 
-        :key="matter.id" 
-        class="ma-2"
-        color="#616161"
-        dark
-      >
-        {{ matter.name }}
-      </v-chip>
-    </div>
-
-  </v-card-text>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>

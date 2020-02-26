@@ -1,45 +1,47 @@
 <template>
-  <v-card-text>
-    <v-autocomplete
-      v-model="values"
-      :items="persons"
-      item-text="name"
-      item-value="id"
-      :search-input.sync="search"
-      cache-items
-      dense
-      chips
-      small-chips
-      background-color="backSearchVille"
-    ></v-autocomplete>
+  <v-card>
+    <v-card-title>Persons</v-card-title>
+    <v-card-text>
+      <v-autocomplete
+        v-model="values"
+        :items="persons"
+        item-text="name"
+        item-value="id"
+        :search-input.sync="search"
+        cache-items
+        dense
+        chips
+        small-chips
+        background-color="backSearchVille"
+      ></v-autocomplete>
 
-    <!-- villes séléctionnée -->
-    <div class="selected_person">
-      <v-chip v-if="person_selected"
-          class="mr-2"
-          color="#b1040e"
+      <!-- villes séléctionnée -->
+      <div class="selected_person">
+        <v-chip v-if="person_selected"
+            class="mr-2"
+            color="#b1040e"
+            dark
+            @click="savePerson()"
+          >
+            <v-icon left>save</v-icon>
+            {{person_selected.name}}
+        </v-chip>
+      </div>
+
+      <!-- lite des villes séléctionnées -->
+      <div class="persons_list">
+        <v-chip 
+          v-for="person in persons_list" 
+          :key="person.id" 
+          class="ma-2"
+          color="#616161"
           dark
-          @click="savePerson()"
         >
-          <v-icon left>save</v-icon>
-          {{person_selected.name}}
-      </v-chip>
-    </div>
-
-    <!-- lite des villes séléctionnées -->
-    <div class="persons_list">
-      <v-chip 
-        v-for="person in persons_list" 
-        :key="person.id" 
-        class="ma-2"
-        color="#616161"
-        dark
-      >
-        {{ person.name }}
-      </v-chip>
-    </div>
-
-  </v-card-text>
+          {{ person.name }}
+        </v-chip>
+      </div>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
