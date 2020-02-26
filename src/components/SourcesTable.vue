@@ -43,7 +43,7 @@
     <template #expanded-item="{headers, item}">
       <td :colspan="headers.length">
         <v-row>
-          <v-col cols="12" md="3">
+          <v-col cols="12" md="6">
             <v-textarea 
               slot="input" 
               v-model="item.source"
@@ -58,17 +58,41 @@
               :industries="industries"
             />
           </v-col>
+
           <v-col cols="12" md="3">
             <h3 class="text-center villes">Localization/cities</h3>
             <city-autocomplete :source_id="item.id" :cities_source="item.cities" />
           </v-col>
+
           <v-col cols="12" md="3">
             <h3 class="text-center">Industries</h3>
             <domain-select :source_id="item.id" :domains="domains" :domains_source="item.domains" />
           </v-col>
+
+        </v-row>
+
+        <v-row>
+          
           <v-col cols="12" md="3">
-            <h3 class="text-center">Actors</h3>
+            <h3 class="text-center">Reference</h3>
+            <ref-id :source_id="item.id" :ref_id="item.ref_id" />
           </v-col>
+
+          <v-col cols="12" md="3">
+            <h3 class="text-center">Persons</h3>
+            <person-autocomplete :source_id="item.id" :persons_source="item.persons" />
+          </v-col>
+
+          <v-col cols="12" md="3">
+            <h3 class="text-center">Groups</h3>
+            <group-autocomplete :source_id="item.id" :groups_source="item.groups" />
+          </v-col>
+
+          <v-col cols="12" md="3">
+            <h3 class="text-center">Case type</h3>
+            <matter-autocomplete :source_id="item.id" :matters_source="item.matters" />
+          </v-col>
+          
         </v-row>
 
       </td>
@@ -82,7 +106,11 @@
 import highlightSource from "./parts/highlightSource";
 import domainsList from "./parts/domainsList";
 import cityAutocomplete from "./parts/cityAutocomplete";
+import personAutocomplete from "./parts/personAutocomplete";
+import groupAutocomplete from "./parts/groupAutocomplete";
+import matterAutocomplete from "./parts/matterAutocomplete";
 import domainSelect from "./parts/domainSelect";
+import refId from "./parts/refId";
 
 export default {
   props: ["sources", "industries", "domains"],
@@ -94,7 +122,11 @@ export default {
     "highlight-source": highlightSource,
     "domains-list": domainsList,
     "city-autocomplete": cityAutocomplete,
-    "domain-select": domainSelect
+    "person-autocomplete": personAutocomplete,
+    "group-autocomplete": groupAutocomplete,
+    "matter-autocomplete": matterAutocomplete,
+    "domain-select": domainSelect,
+    "ref-id": refId,
   },
   computed: {
     headers() {

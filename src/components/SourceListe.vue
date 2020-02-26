@@ -15,6 +15,7 @@ export default {
   data: () => ({
     sources: [],
     industries: [],
+    domains: [],
     pagination: {},
     page: 1,
     panel: []

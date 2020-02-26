@@ -1,6 +1,5 @@
 <template>
   <v-card-text>
-    {{value}}
     <v-select
       v-model="value"
       :items="domains"
@@ -17,10 +16,10 @@
           class="mr-2"
           color="#b1040e"
           dark
-          @click="saveCity()"
+          @click="saveDomain()"
         >
           <v-icon left>save</v-icon>
-          {{domains_selected.domain}}
+          {{domain_selected.domain}}
       </v-chip>
     </div>
 
@@ -47,19 +46,35 @@ export default {
   data: function () {
     return {
       domains_list: this.domains_source,
-      value: null
+      value: []
     }
   },
   computed: {
     domain_selected() {
-      if (this.value !== null) {
-        const selected = this.domain.filter(x => x.id == this.value);
+      if(typeof this.value === 'number') {
+        const selected = this.domains.filter(x => x.id == this.value);
         if (selected.length > 0) {
           return selected[0]
+        } else {
+          return false;
         }
+      } else {
+        return false;
       }
-      return false;
-    },
+    }
   },
+  methods: {
+    saveDomain() {
+      window.axios
+        .post('sources/domain/store', {'domain_id': this.domain_selected.id, 'source_id':this.source_id})
+        .then(() => {
+          this.domains_list = this.domains_list.concat({'id': this.domain_selected.id, 'domain': this.domain_selected.domain});
+          this.values = null;
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
 }
 </script>
