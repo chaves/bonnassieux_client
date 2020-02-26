@@ -51,6 +51,7 @@
               dense 
               filled
               rows="3"
+              background-color="#FFEBEE"
               auto-grow>
             </v-textarea>
             <domains-list
@@ -75,7 +76,11 @@
           
           <v-col cols="12" md="3">
             <h3 class="text-center">Reference</h3>
-            <ref-id :source_id="item.id" :ref_id="item.ref_id" />
+            <v-text-field
+              v-model="item.ref_id"
+              single-line
+              v-on:change="updateRefId(ref)"
+            ></v-text-field>
           </v-col>
 
           <v-col cols="12" md="3">
@@ -110,7 +115,6 @@ import personAutocomplete from "./parts/personAutocomplete";
 import groupAutocomplete from "./parts/groupAutocomplete";
 import matterAutocomplete from "./parts/matterAutocomplete";
 import domainSelect from "./parts/domainSelect";
-import refId from "./parts/refId";
 
 export default {
   props: ["sources", "industries", "domains"],
@@ -125,13 +129,13 @@ export default {
     "person-autocomplete": personAutocomplete,
     "group-autocomplete": groupAutocomplete,
     "matter-autocomplete": matterAutocomplete,
-    "domain-select": domainSelect,
-    "ref-id": refId,
+    "domain-select": domainSelect
   },
   computed: {
     headers() {
       return [
         { text: "id", sortable: false, value: "id" },
+        { text: "ref_id", sortable: false, value: "ref_id" },
         { text: "Date", sortable: true, value: "date", width: "110px" },
         { text: "Source", sortable: false, value: "source" },
         { text: "Validated", sortable: false, value: "validated" }
@@ -148,6 +152,12 @@ export default {
     updateValidateSource(id, validated) {
       window.axios
         .post(`sources/${id}/validate`, {'validated':validated})
+        .then()
+        .catch();
+    },
+    updateRefId(ref) {
+      window.axios
+        .post(`sources/ref_id/${this.source_id}/update`, {'ref_id': ref})
         .then()
         .catch();
     }

@@ -69,7 +69,7 @@ export default {
         .post('sources/domain/store', {'domain_id': this.domain_selected.id, 'source_id':this.source_id})
         .then(() => {
           this.domains_list = this.domains_list.concat({'id': this.domain_selected.id, 'domain': this.domain_selected.domain});
-          this.values = null;
+          this.value = [];
         })
         .catch(err => {
           console.log(err)
