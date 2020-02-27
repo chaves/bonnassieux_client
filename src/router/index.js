@@ -5,11 +5,7 @@ Vue.use(VueRouter);
 
 import SourceListe from "@/components/SourceListe";
 import SourceListeValidated from "@/components/SourceListeValidated";
-import DictionaryCities from "@/components/dictionnaries/DictionaryCities";
-import DictionaryIndustries from "@/components/dictionnaries/DictionaryIndustries";
-import DictionaryPersons from "@/components/dictionnaries/DictionaryPersons";
-import DictionaryGroups from "@/components/dictionnaries/DictionaryGroups";
-import DictionaryCases from "@/components/dictionnaries/DictionaryCases";
+import Dictionary from "@/components/Dictionary";
 
 const routes = [
   {
@@ -22,23 +18,28 @@ const routes = [
   },
   {
     path: "/cities",
-    component: DictionaryCities
+    component: Dictionary,
+    props: { url: "cities" }
   },
   {
-    path: "/industries",
-    component: DictionaryIndustries
+    path: "/domains",
+    component: Dictionary,
+    props: { url: "domains" }
   },
   {
     path: "/persons",
-    component: DictionaryPersons
+    component: Dictionary,
+    props: { url: "persons" }
   },
   {
     path: "/groups",
-    component: DictionaryGroups
+    component: Dictionary,
+    props: { url: "groups" }
   },
   {
     path: "/cases",
-    component: DictionaryCases
+    component: Dictionary,
+    props: { url: "matters" }
   }
 ];
 

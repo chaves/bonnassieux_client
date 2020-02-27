@@ -12,7 +12,7 @@
     </v-card-title>
     <v-data-table 
       :headers="headers" 
-      :items="matters" 
+      :items="datas" 
       :search="search" 
       class="elevation-1"
       :footer-props="{
@@ -26,9 +26,23 @@
 
 <script>
 export default {
-  data: () => ({
-    matters: [],
-  }),
+  props: ["url"],
+  data: function () {
+    return {
+      datas: [],
+      search: '',
+    }
+  },
+  created () {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    // https://router.vuejs.org/guide/advanced/data-fetching.html#fetching-after-navigation
+    this.fetchData()
+  },
+  watch: {
+    // call again the method if the route changes
+    '$route': 'fetchData'
+  },
   computed: {
     headers() {
       return [
@@ -37,13 +51,12 @@ export default {
       ]
     }
   },
-  mounted() {
-    window.axios
-      .get('matters/counts')
-      .then(response => this.matters = response.data);
-  },
   methods: {
-
+    fetchData () {
+      window.axios
+      .get(this.url + '/counts')
+      .then(response => this.datas = response.data);
+    }
   }
 }
 </script>

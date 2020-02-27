@@ -38,7 +38,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/industries">
+        <v-list-item link to="/domains">
           <v-list-item-action>
             <v-icon>mdi-factory</v-icon>
           </v-list-item-action>
