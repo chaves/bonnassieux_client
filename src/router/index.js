@@ -4,17 +4,19 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 import SourceListe from "@/components/SourceListe";
-import SourceListeValidated from "@/components/SourceListeValidated";
 import Dictionary from "@/components/Dictionary";
+import Map from "../components/Map";
 
 const routes = [
   {
     path: "/",
-    component: SourceListe
+    component: SourceListe,
+    props: { url: "sources" }
   },
   {
     path: "/valides",
-    component: SourceListeValidated
+    component: SourceListe,
+    props: { url: "sources/validated" }
   },
   {
     path: "/cities",
@@ -40,6 +42,10 @@ const routes = [
     path: "/cases",
     component: Dictionary,
     props: { url: "matters" }
+  },
+  {
+    path: "/map",
+    component: Map
   }
 ];
 
