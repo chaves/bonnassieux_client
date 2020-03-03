@@ -152,11 +152,13 @@ export default {
     // fetch the data when the view is created and the data is
     // already being observed
     // https://router.vuejs.org/guide/advanced/data-fetching.html#fetching-after-navigation
-    this.fetchData()
+    this.fetchSources(),
+    this.fetchDicos()
   },
   watch: {
     // call again the method if the route changes
-    '$route': 'fetchData'
+    '$route': 'fetchSources',
+    'page': 'fetchSources'
   },
   computed: {
     headers() {
@@ -180,11 +182,12 @@ export default {
       this.pagination = pagination;
       this.sources = data.data;
     },
-    fetchData: function() {
+    fetchSources: function() {
       window.axios
-        .get(this.url)
+        .get(this.url + "?page=" + this.page)
         .then(response => this.getData(response.data));
-
+    },
+    fetchDicos: function() {
       window.axios
         .get('industries')
         .then(response => this.industries = response.data);
