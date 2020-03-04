@@ -1,44 +1,6 @@
 <template>
   <v-card>
     <v-card-title>
-
-        <v-btn class="mx-2" fab small dark color="#b1040e">
-          <v-icon dark>mdi-plus</v-icon>
-        </v-btn>
-
-    <v-dialog
-      v-model="dialog"
-      max-width="290"
-    >
-      <v-card>
-        <v-card-title class="headline">Use Google's location service?</v-card-title>
-
-        <v-card-text>
-          Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialog = false"
-          >
-            Disagree
-          </v-btn>
-
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialog = false"
-          >
-            Agree
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -48,6 +10,50 @@
         hide-details
       ></v-text-field>
     </v-card-title>
+
+    <v-row>
+      <v-col cols="12" sm="4">
+        <v-card-text>
+          <v-form
+            ref="form"
+          >
+            <v-text-field
+                v-model="item"
+                label="Ajouter un item"
+                filled
+                :rules="[rules.required, rules.counter]"
+              ></v-text-field>
+          </v-form>
+        </v-card-text>
+      </v-col>
+      <v-col cols="12" sm="2">
+        <v-card-text>
+          <v-btn
+              color="success"
+              class="mr-4 float-md-right"
+              @click="addItem"
+          >
+          Valider
+          </v-btn>
+        </v-card-text> 
+      </v-col> 
+    </v-row>
+
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+      top
+    >
+      Item ajouté
+      <v-btn
+        color="blue"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
+
     <v-data-table 
       :headers="headers" 
       :items="datas" 
@@ -69,6 +75,12 @@ export default {
     return {
       datas: [],
       search: '',
+      item: '',
+      rules: {
+      required: value => !!value || 'Required.'
+      },
+      snackbar: false,
+      timeout: 2000,
     }
   },
   created () {
@@ -94,6 +106,17 @@ export default {
       window.axios
       .get(this.url + '/counts')
       .then(response => this.datas = response.data);
+    },
+    addItem() {  
+      if(this.item || this.item.length > 0)  
+        window.axios
+        .post(this.url + '/add', {'item':this.item})
+        .then(resp => {
+          this.datas.push( { "id": resp, "name": this.item, "sources_count": 0 });
+          this.item = '';
+          this.snackbar = true
+        })
+        .catch();
     }
   }
 }

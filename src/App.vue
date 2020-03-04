@@ -38,6 +38,15 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link to="/regions">
+          <v-list-item-action>
+            <v-icon>mdi-map</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Regions</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item link to="/domains">
           <v-list-item-action>
             <v-icon>mdi-factory</v-icon>
@@ -62,15 +71,6 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Groups</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item link to="/cases">
-          <v-list-item-action>
-            <v-icon>mdi-briefcase</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Case types</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 

@@ -72,7 +72,7 @@
                 </v-col>
 
                 <v-col cols="12" md="3">
-                  <domain-select :source_id="item.id" :domains="domains" :domains_source="item.domains" />
+                  <region-select :source_id="item.id" :regions="regions" :regions_source="item.regions" />
                 </v-col>
 
               </v-row>
@@ -93,15 +93,15 @@
                 </v-col>
 
                 <v-col cols="12" md="3">
+                  <domain-select :source_id="item.id" :domains="domains" :domains_source="item.domains" />
+                </v-col>
+
+                <v-col cols="12" md="3">
                   <person-autocomplete :source_id="item.id" :persons_source="item.persons" />
                 </v-col>
 
                 <v-col cols="12" md="3">
                   <group-autocomplete :source_id="item.id" :groups_source="item.groups" />
-                </v-col>
-
-                <v-col cols="12" md="3">
-                  <matter-autocomplete :source_id="item.id" :matters_source="item.matters" />
                 </v-col>
                 
               </v-row>
@@ -121,9 +121,10 @@
 import highlightSource from "./parts/highlightSource";
 import domainsList from "./parts/domainsList";
 import cityAutocomplete from "./parts/cityAutocomplete";
+import regionSelect from "./parts/regionSelect";
 import personAutocomplete from "./parts/personAutocomplete";
 import groupAutocomplete from "./parts/groupAutocomplete";
-import matterAutocomplete from "./parts/matterAutocomplete";
+// import matterAutocomplete from "./parts/matterAutocomplete";
 import domainSelect from "./parts/domainSelect";
 import paginationSources from "./parts/paginationSources";
 
@@ -134,6 +135,7 @@ export default {
     sources: [],
     industries: [],
     domains: [],
+    regions: [],
     pagination: {},
     page: 1,
     panel: []
@@ -142,9 +144,10 @@ export default {
     "highlight-source": highlightSource,
     "domains-list": domainsList,
     "city-autocomplete": cityAutocomplete,
+    "region-select": regionSelect,
     "person-autocomplete": personAutocomplete,
     "group-autocomplete": groupAutocomplete,
-    "matter-autocomplete": matterAutocomplete,
+    // "domain-autocomplete": matterAutocomplete,
     "domain-select": domainSelect,
     "pagination-sources": paginationSources
   },
@@ -195,6 +198,9 @@ export default {
       window.axios
         .get('domains')
         .then(response => this.domains = response.data);
+      window.axios
+        .get('regions')
+        .then(response => this.regions = response.data); 
     },
     updateSourceText(id, source) {
       window.axios

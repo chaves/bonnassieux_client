@@ -24,6 +24,11 @@ const routes = [
     props: { url: "cities" }
   },
   {
+    path: "/regions",
+    component: Dictionary,
+    props: { url: "regions" }
+  },
+  {
     path: "/domains",
     component: Dictionary,
     props: { url: "domains" }
@@ -37,11 +42,6 @@ const routes = [
     path: "/groups",
     component: Dictionary,
     props: { url: "groups" }
-  },
-  {
-    path: "/cases",
-    component: Dictionary,
-    props: { url: "matters" }
   },
   {
     path: "/map",
