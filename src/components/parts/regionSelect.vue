@@ -25,18 +25,8 @@
         </v-chip>
       </div>
 
-      <!-- lite des villes séléctionnées -->
-      <div class="regions_list">
-        <v-chip 
-          v-for="region in regions_list" 
-          :key="region.id" 
-          class="ma-2"
-          color="#616161"
-          dark
-        >
-          {{ region.name }}
-        </v-chip>
-      </div>
+      <!-- lite des items séléctionnés -->
+      <items-list :type="'region'" :source_id="source_id" :list="regions_list" />
 
     </v-card-text>
   </v-card> 
@@ -44,6 +34,7 @@
 
 
 <script>
+import itemsList from "./itemsList";
 export default {
   props: ["source_id", "regions_source", "regions"],
   data: function () {
@@ -51,6 +42,9 @@ export default {
       regions_list: this.regions_source,
       value: []
     }
+  },
+  components: {
+    'items-list': itemsList,
   },
   computed: {
     region_selected() {
@@ -73,6 +67,16 @@ export default {
         .then(() => {
           this.regions_list = this.regions_list.concat({'id': this.region_selected.id, 'name': this.region_selected.name});
           this.value = [];
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    remove(id, region_id) {
+      window.axios
+        .post('sources/region/remove', {'region_id': region_id, 'source_id':this.source_id})
+        .then(() => {
+          this.$delete(this.regions_list, id);
         })
         .catch(err => {
           console.log(err)

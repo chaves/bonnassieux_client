@@ -28,26 +28,22 @@
         </v-chip>
       </div>
 
-      <!-- lite des villes séléctionnées -->
-      <div class="groups_list">
-        <v-chip 
-          v-for="group in groups_list" 
-          :key="group.id" 
-          class="ma-2"
-          color="#616161"
-          dark
-        >
-          {{ group.name }}
-        </v-chip>
-      </div>
+      <!-- lite des items séléctionnés -->
+      <items-list :type="'group'" :source_id="source_id" :list="groups_list" />
 
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import itemsList from "./itemsList";
+
 export default {
   props: ["source_id", "groups_source"],
+
+  components: {
+    'items-list': itemsList,
+  },
 
   data: function () {
     return {

@@ -25,18 +25,8 @@
         </v-chip>
       </div>
 
-      <!-- lite des villes séléctionnées -->
-      <div class="domains_list">
-        <v-chip 
-          v-for="domain in domains_list" 
-          :key="domain.id" 
-          class="ma-2"
-          color="#616161"
-          dark
-        >
-          {{ domain.name }}
-        </v-chip>
-      </div>
+      <!-- lite des items séléctionnés -->
+      <items-list :type="'domain'" :source_id="source_id" :list="domains_list" />
 
     </v-card-text>
   </v-card> 
@@ -44,8 +34,13 @@
 
 
 <script>
+import itemsList from "./itemsList";
+
 export default {
   props: ["source_id", "domains_source", "domains"],
+  components: {
+    'items-list': itemsList,
+  },
   data: function () {
     return {
       domains_list: this.domains_source,

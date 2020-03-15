@@ -28,26 +28,23 @@
         </v-chip>
       </div>
 
-      <!-- lite des villes séléctionnées -->
-      <div class="persons_list">
-        <v-chip 
-          v-for="person in persons_list" 
-          :key="person.id" 
-          class="ma-2"
-          color="#616161"
-          dark
-        >
-          {{ person.name }}
-        </v-chip>
-      </div>
+      <!-- lite des items séléctionnés -->
+      <items-list :type="'person'" :source_id="source_id" :list="persons_list" />
+
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import itemsList from "./itemsList";
+
 export default {
   props: ["source_id", "persons_source"],
 
+  components: {
+    'items-list': itemsList,
+  },
+  
   data: function () {
     return {
       persons: [],
