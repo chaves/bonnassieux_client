@@ -21,7 +21,7 @@
                 v-model="item"
                 label="Ajouter un item"
                 filled
-                :rules="[rules.required, rules.counter]"
+                :rules="[rules.required]"
               ></v-text-field>
           </v-form>
         </v-card-text>
@@ -64,6 +64,9 @@
       }"
       dense
     >
+    <template v-slot:item.remove="{ item }">
+      <v-icon color="red" @click="remove(item)">mdi-delete</v-icon>
+    </template>
     </v-data-table>
   </v-card>
 </template>
@@ -96,8 +99,9 @@ export default {
   computed: {
     headers() {
       return [
-        { text: "Total", sortable: false, value: "sources_count" },
-        { text: "Name", sortable: false, value: "name" }
+        { text: "Total", sortable: true, value: "sources_count" },
+        { text: "Name", sortable: true, value: "name" },
+        { text: 'Remove', sortable: true, value: 'remove' }
       ]
     }
   },
@@ -117,6 +121,17 @@ export default {
           this.snackbar = true
         })
         .catch();
+    },
+    remove(item) {
+      const index = this.datas.indexOf(item)
+      window.axios
+      .delete(this.url+ '/remove/' + item.id)
+      .then(() => {
+        this.datas.splice(index, 1)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   }
 }

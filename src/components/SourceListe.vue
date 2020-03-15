@@ -29,6 +29,9 @@
             <highlight-source
               :source="item.source"
               :industries="industries"
+              :cities="cities"
+              :regions="regions"
+              :persons="persons"
             />
           </template>
 
@@ -134,8 +137,10 @@ export default {
     search: '',
     sources: [],
     industries: [],
+    cities: [],
     domains: [],
     regions: [],
+    persons: [],
     pagination: {},
     page: 1,
     panel: []
@@ -196,11 +201,20 @@ export default {
         .then(response => this.industries = response.data);
 
       window.axios
+        .get('cities')
+        .then(response => this.cities = response.data);
+
+      window.axios
         .get('domains')
         .then(response => this.domains = response.data);
+
       window.axios
         .get('regions')
-        .then(response => this.regions = response.data); 
+        .then(response => this.regions = response.data);
+      
+      window.axios
+        .get('persons')
+        .then(response => this.persons = response.data); 
     },
     updateSourceText(id, source) {
       window.axios
