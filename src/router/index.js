@@ -5,7 +5,6 @@ Vue.use(VueRouter);
 
 import SourceListe from "@/components/SourceListe";
 import Dictionary from "@/components/Dictionary";
-import Map from "../components/Map";
 
 const routes = [
   {
@@ -42,10 +41,6 @@ const routes = [
     path: "/groups",
     component: Dictionary,
     props: { url: "groups" }
-  },
-  {
-    path: "/map",
-    component: Map
   }
 ];
 
