@@ -19,7 +19,7 @@
             :search="search" 
             class="elevation-1"
             :footer-props="{
-              itemsPerPageOptions: [50,100,200,-1]
+              itemsPerPageOptions: [200,500,1000,-1]
             }"
             show-expand
             dense
