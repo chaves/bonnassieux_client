@@ -1,13 +1,15 @@
 <template>
   <div class="selected_list">
-    <v-chip 
+    <span 
       v-for="(item, id) in list" 
       :key="id" 
-      class="ma-2"
-      dark
+      class="font-weight-black"
+      style="color:#1A237E"
     >
-      {{ item.name }} <v-icon @click="remove(id, item.id)">mdi-delete</v-icon>
-    </v-chip>
+      {{ item.name }}
+      <v-icon color="#b1040e" @click="remove(id, item.id)">mdi-delete</v-icon>
+    </span>
+    
   </div>
 </template>
 
