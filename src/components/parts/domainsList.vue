@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li v-for="domain in domains" :key="domain.id">
-      key : <span style="background-color: #FFFF00">{{ domain.industry }}</span> - industry : <strong>{{ domain.domain.domain }}</strong>
+      key : <span style="background-color: #FFFF00">{{ domain.name }}</span> - industry : <strong>{{ domain.domain.name }}</strong>
     </li>
   </ul>
 </template>
