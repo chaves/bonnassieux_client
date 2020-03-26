@@ -8,7 +8,6 @@
         item-text="name"
         item-value="id"
         :search-input.sync="search"
-        cache-items
         dense
         chips
         small-chips
