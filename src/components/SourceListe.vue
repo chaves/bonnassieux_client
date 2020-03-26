@@ -75,7 +75,7 @@
                 </v-col>
 
                 <v-col cols="12" md="3">
-                  <region-select :source_id="item.id" :regions="regions" :regions_source="item.regions" />
+                  <region-autocomplete :source_id="item.id" :regions_source="item.regions" />
                 </v-col>
 
               </v-row>
@@ -124,7 +124,7 @@
 import highlightSource from "./parts/highlightSource";
 import domainsList from "./parts/domainsList";
 import cityAutocomplete from "./parts/cityAutocomplete";
-import regionSelect from "./parts/regionSelect";
+import regionAutocomplete from "./parts/regionAutocomplete";
 import personAutocomplete from "./parts/personAutocomplete";
 import groupAutocomplete from "./parts/groupAutocomplete";
 // import matterAutocomplete from "./parts/matterAutocomplete";
@@ -149,7 +149,7 @@ export default {
     "highlight-source": highlightSource,
     "domains-list": domainsList,
     "city-autocomplete": cityAutocomplete,
-    "region-select": regionSelect,
+    "region-autocomplete": regionAutocomplete,
     "person-autocomplete": personAutocomplete,
     "group-autocomplete": groupAutocomplete,
     // "domain-autocomplete": matterAutocomplete,

@@ -2,17 +2,19 @@
   <v-card>
     <v-card-title>Regions</v-card-title>
     <v-card-text>
-      <v-select
-        v-model="value"
+      <v-autocomplete
+        v-model="values"
         :items="regions"
         item-text="name"
         item-value="id"
+        :search-input.sync="search"
         dense
         chips
         small-chips
-      ></v-select>
+        background-color="backSearchVille"
+      ></v-autocomplete>
 
-      <!-- regiones séléctionnés -->
+      <!-- villes séléctionnée -->
       <div class="region_selected">
         <v-chip v-if="region_selected"
             class="mr-2"
@@ -29,35 +31,36 @@
       <items-list :type="'region'" :source_id="source_id" :list="regions_list" />
 
     </v-card-text>
-  </v-card> 
+  </v-card>
 </template>
-
 
 <script>
 import itemsList from "./itemsList";
+
 export default {
-  props: ["source_id", "regions_source", "regions"],
-  data: function () {
-    return {
-      regions_list: this.regions_source,
-      value: []
-    }
-  },
+  props: ["source_id", "regions_source"],
   components: {
     'items-list': itemsList,
   },
+
+  data: function () {
+    return {
+      regions: [],
+      values: null,
+      isLoading: false,
+      search: null,
+      regions_list: this.regions_source
+    }
+  },
   computed: {
     region_selected() {
-      if(typeof this.value === 'number') {
-        const selected = this.regions.filter(x => x.id == this.value);
+      if (this.values !== null) {
+        const selected = this.regions.filter(x => x.id == this.values);
         if (selected.length > 0) {
           return selected[0]
-        } else {
-          return false;
         }
-      } else {
-        return false;
       }
+      return false;
     }
   },
   methods: {
@@ -66,7 +69,7 @@ export default {
         .post('sources/region/store', {'region_id': this.region_selected.id, 'source_id':this.source_id})
         .then(() => {
           this.regions_list = this.regions_list.concat({'id': this.region_selected.id, 'name': this.region_selected.name});
-          this.value = [];
+          this.values = [];
         })
         .catch(err => {
           console.log(err)
@@ -81,6 +84,31 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    }
+  },
+  watch: {
+    search (val) {
+
+      // Items have already been loaded
+      if (this.regions.length > 0) return
+
+      // Items have already been requested
+      if (this.isLoading) return
+
+      // au moins deux carctères
+      if (val.length < 2) return
+
+      this.isLoading = true
+      // Lazily load input items
+      fetch(process.env.VUE_APP_API_URL+ 'regions/search/' + val)
+        .then(res => res.json())
+        .then(res => {
+          this.regions = res;
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        .finally(() => (this.isLoading = false))
     }
   }
 }
