@@ -18,9 +18,8 @@
             :items="sources" 
             :search="search" 
             class="elevation-1"
-            :footer-props="{
-              itemsPerPageOptions: [200,500,1000,-1]
-            }"
+            hide-default-footer
+            disable-pagination
             show-expand
             dense
             must-sort
