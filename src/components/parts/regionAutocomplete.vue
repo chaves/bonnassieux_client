@@ -11,7 +11,6 @@
         dense
         chips
         small-chips
-        background-color="backSearchVille"
       ></v-autocomplete>
 
       <!-- villes séléctionnée -->
@@ -88,9 +87,6 @@ export default {
   },
   watch: {
     search (val) {
-
-      // Items have already been loaded
-      if (this.regions.length > 0) return
 
       // Items have already been requested
       if (this.isLoading) return
