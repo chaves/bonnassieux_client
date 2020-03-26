@@ -1,12 +1,12 @@
 <template>
-  <span v-html="highlight(source, industries, cities, regions, persons)"></span>
+  <span v-html="highlight(source, industries, cities, regions, persons, search)"></span>
 </template>
 
 <script>
 export default {
-  props: ["source", "industries", "cities", "regions", "persons"],
+  props: ["source", "industries", "cities", "regions", "persons", "search"],
   methods: {
-    highlight: function(source, industries, cities, regions, persons) {
+    highlight: function(source, industries, cities, regions, persons, search) {
 
       industries.map(function(value) {
         const regex = RegExp('(\\b'+ value.name +'[s]?\\b)', "igm");
@@ -55,6 +55,20 @@ export default {
           }
         );
       });
+
+      if(search.length >= 2) {
+        const regex = RegExp('(\\b'+ search + ')', "igm");
+        source = source.replace(
+          regex,
+          match => {
+            return (
+              '<span style="background-color: #000; color: #fff">' + match + '</span>'
+            );
+          }
+        );
+      }
+
+
       return source;
     }
   }

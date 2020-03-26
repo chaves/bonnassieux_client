@@ -32,6 +32,7 @@
               :cities="cities"
               :regions="regions"
               :persons="persons"
+              :search="search"
             />
           </template>
 
