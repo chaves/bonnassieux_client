@@ -90,16 +90,6 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    },
-    remove(id, city_id) {
-      window.axios
-        .post('sources/region/remove', {'city_id': city_id, 'source_id':this.source_id})
-        .then(() => {
-          this.$delete(this.cities_list, id);
-        })
-        .catch(err => {
-          console.log(err)
-        })
     }
   },
   watch: {
