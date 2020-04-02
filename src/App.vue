@@ -5,6 +5,20 @@
       app
     >
       <v-list dense>
+
+          <v-list-item>
+            <v-list-item-action>
+              <v-icon>mdi-calendar-month</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-select
+                :items="periods"
+                v-model="selected"
+                dense
+              ></v-select>
+            </v-list-item-content>
+          </v-list-item>
+
           <v-list-item link to="/">
             <v-list-item-action>
               <v-icon>mdi-home</v-icon>
@@ -93,7 +107,7 @@
       >
         <v-row>
           <v-col>
-            <router-view/>
+            <router-view :selected="selected" />
           </v-col>
         </v-row>
       </v-container>
@@ -110,7 +124,9 @@
 <script>
   export default {
     data: () => ({
-      drawer: null
+      drawer: null,
+      selected: 'all periods',
+      periods: ['all periods', '1700-1710', '1710-1720', '1720-1730', '1730-1740', '1740-1750', '1750-1760', '1760-1770', '1770-1780', '1750-1792']
     })
   }
 </script>

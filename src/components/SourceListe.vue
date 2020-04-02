@@ -132,7 +132,7 @@ import domainSelect from "./parts/domainSelect";
 import paginationSources from "./parts/paginationSources";
 
 export default {
-  props: ["url"],
+  props: ["url", "selected"],
   data: () => ({
     search: '',
     sources: [],
@@ -166,7 +166,8 @@ export default {
   watch: {
     // call again the method if the route changes
     '$route': 'fetchSources',
-    'page': 'fetchSources'
+    'page': 'fetchSources',
+    'selected': 'fetchSources'
   },
   computed: {
     headers() {
@@ -192,7 +193,7 @@ export default {
     },
     fetchSources: function() {
       window.axios
-        .get(this.url + "?page=" + this.page)
+        .get(this.url + "?page=" + this.page + "&selected=" + this.selected)
         .then(response => this.getData(response.data));
     },
     fetchDicos: function() {
