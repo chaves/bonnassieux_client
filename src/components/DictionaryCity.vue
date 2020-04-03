@@ -1,58 +1,17 @@
 <template>
   <v-card>
+
     <v-card-title>
       <v-spacer></v-spacer>
       <v-text-field
-        v-model="search"
-        append-icon="search"
-        label="Search"
-        single-line
-        hide-details
+              v-model="search"
+              append-icon="search"
+              label="Search"
+              single-line
+              hide-details
       ></v-text-field>
     </v-card-title>
-
-    <v-row>
-      <v-col cols="12" sm="4">
-        <v-card-text>
-          <v-form
-            ref="form"
-          >
-            <v-text-field
-                v-model="item"
-                label="Ajouter un item"
-                filled
-                :rules="[rules.required]"
-              ></v-text-field>
-          </v-form>
-        </v-card-text>
-      </v-col>
-      <v-col cols="12" sm="2">
-        <v-card-text>
-          <v-btn
-              color="success"
-              class="mr-4 float-md-right"
-              @click="addItem"
-          >
-          Valider
-          </v-btn>
-        </v-card-text> 
-      </v-col> 
-    </v-row>
-
-    <v-snackbar
-      v-model="snackbar"
-      :timeout="timeout"
-      top
-    >
-      Item ajouté
-      <v-btn
-        color="blue"
-        text
-        @click="snackbar = false"
-      >
-        Close
-      </v-btn>
-    </v-snackbar>
+    <v-spacer></v-spacer>
 
     <v-data-table 
       :headers="headers" 
@@ -81,9 +40,7 @@ export default {
       item: '',
       rules: {
       required: value => !!value || 'Required.'
-      },
-      snackbar: false,
-      timeout: 2000,
+      }
     }
   },
   created () {
@@ -110,17 +67,6 @@ export default {
       window.axios
       .get(this.url + '/counts')
       .then(response => this.datas = response.data);
-    },
-    addItem() {  
-      if(this.item || this.item.length > 0)  
-        window.axios
-        .post(this.url + '/add', {'item':this.item})
-        .then(resp => {
-          this.datas.push( { "id": resp, "name": this.item, "sources_count": 0 });
-          this.item = '';
-          this.snackbar = true
-        })
-        .catch();
     },
     remove(item) {
       const index = this.datas.indexOf(item)

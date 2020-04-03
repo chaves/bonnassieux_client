@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 
 import SourceListe from "@/components/SourceListe";
 import Dictionary from "@/components/Dictionary";
+import DictionaryCity from "@/components/DictionaryCity";
 
 const routes = [
   {
@@ -19,7 +20,7 @@ const routes = [
   },
   {
     path: "/cities",
-    component: Dictionary,
+    component: DictionaryCity,
     props: { url: "cities" }
   },
   {
