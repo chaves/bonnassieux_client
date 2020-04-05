@@ -90,6 +90,21 @@
 
       </v-list>
 
+      <v-divider></v-divider>
+      <h5 class="mt-3 ml-5">Statistics and maps</h5>
+      <v-list dense>
+
+        <v-list-item link to="/cities-map">
+          <v-list-item-action>
+            <v-icon>mdi-map-marker-multiple</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Cities map</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+      </v-list>
+
     </v-navigation-drawer>
 
     <v-app-bar
@@ -113,7 +128,6 @@
       </v-container>
     </v-content>
     <v-footer
-      color="indigo"
       app
     >
       <span class="white--text"></span>
