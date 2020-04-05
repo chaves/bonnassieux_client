@@ -62,6 +62,7 @@ export default {
       range_min: RANGE_MIN,
       range_max: RANGE_MAX,
       range_slider: [RANGE_MIN, RANGE_MAX],
+      range_slider_tempo: [RANGE_MIN, RANGE_MAX],
       range_bool: false,
       range_fixed: 5,
       // map
@@ -81,7 +82,7 @@ export default {
   },
   watch: {
     'range_slider': 'updateMap',
-    'range_bool': 'updateMap'
+    'range_bool': 'updateRange'
   },
   methods: {
 
@@ -278,11 +279,19 @@ export default {
       this.updateRange();
       this.makeMarkers();
       this.makeCircles();
+      this.range_slider_tempo = this.range_slider;
     },
     updateRange() {
-      if(this.range_bool) {
+      // bouton max actionné
+      if(this.range_bool && this.range_slider[1] !== this.range_slider_tempo[1]) {
         if (this.range_slider[1] - this.range_fixed >= this.range_min) {
           this.range_slider[0] = this.range_slider[1] - this.range_fixed;
+        }
+      }
+      // bouton min actionné
+      if(this.range_bool && this.range_slider[0] !== this.range_slider_tempo[0]) {
+        if (this.range_slider[0] + this.range_fixed <= this.range_max) {
+          this.range_slider[1] = this.range_slider[0] + this.range_fixed;
         }
       }
     }
