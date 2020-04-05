@@ -121,7 +121,7 @@ export default {
           .translate(this.translate);
 
       // Add a scale for bubble size
-      const size = d3.scaleLinear()
+      const size = d3.scaleSqrt()
           .domain([this.domain_min,this.domain_max])  // What's in the data
           .range(this.map_center);  // Size in pixel
 
@@ -140,44 +140,97 @@ export default {
         .style("border-radius", "5px")
         .style("padding", "5px");
 
-        // Add circles:
-        const svg = d3.select("svg");
-          svg.selectAll("circle").remove();
+      // Add circles:
+      const svg = d3.select("svg");
+        svg.selectAll("circle").remove();
+        svg.selectAll("line").remove();
+        svg.selectAll("text").remove();
 
-        const circles =
-          svg.select("g")
-          .selectAll("circle")
-          .data(this.markers);
+      const circles =
+        svg.select("g")
+        .selectAll("circle")
+        .data(this.markers);
 
-        circles
-          .enter()
-          .append("circle")
-          .attr("cx", function(d){ return projection([d.long, d.lat])[0] })
-          .attr("cy", function(d){ return projection([d.long, d.lat])[1] })
-          .attr("r", function(d){ return size(d.count) })
-          .style("fill", '#402D54')
-          .attr("stroke", '#402D54')
-          .attr("stroke-width", 1)
-          .attr("fill-opacity", .4)
-          .on("mouseover", function(d) {
-            Tooltip
-              .style("opacity", 1)
-              .html(d.name + "<br>" + "total: " + d.count)
-              .style("position", "absolute")
-              .style("left", (d3.mouse(this)[0]+10) + "px")
-              .style("top", (d3.mouse(this)[1]) + "px");
-              d3.select(this)
-                      .transition()
-                      .style("fill", 'red')
-                      .attr("fill-opacity", 1)
-          })
-          .on("mouseleave", function() {
-            Tooltip.style("opacity", 0);
+      circles
+        .enter()
+        .append("circle")
+        .attr("cx", function(d){ return projection([d.long, d.lat])[0] })
+        .attr("cy", function(d){ return projection([d.long, d.lat])[1] })
+        .attr("r", function(d){ return size(d.count) })
+        .style("fill", '#402D54')
+        .attr("stroke", '#402D54')
+        .attr("stroke-width", 1)
+        .attr("fill-opacity", .4)
+        .on("mouseover", function(d) {
+          Tooltip
+            .style("opacity", 1)
+            .html(d.name + "<br>" + "total: " + d.count)
+            .style("position", "absolute")
+            .style("left", (d3.mouse(this)[0]+10) + "px")
+            .style("top", (d3.mouse(this)[1]) + "px");
             d3.select(this)
                     .transition()
-                    .style("fill", '#402D54')
-                    .attr("fill-opacity", .4)
-          });
+                    .style("fill", 'red')
+                    .attr("fill-opacity", 1)
+        })
+        .on("mouseleave", function() {
+          Tooltip.style("opacity", 0);
+          d3.select(this)
+                  .transition()
+                  .style("fill", '#402D54')
+                  .attr("fill-opacity", .4)
+        });
+
+      function compare_desc(a, b) {
+        let comparison = 0;
+        a.count < b.count ? comparison = 1 : comparison = -1;
+        return comparison;
+      }
+
+      const markers_ordered = this.markers.sort(compare_desc);
+
+      const legend_items = [
+        markers_ordered[0],
+        markers_ordered[5],
+      ];
+
+      const xCircle = 50;
+      const xLabel = 110;
+      const yCircle = 100;
+      svg
+        .selectAll("legend")
+        .data(legend_items)
+        .enter()
+        .append("circle")
+        .attr("cx", xCircle)
+        .attr("cy", function(d){ return yCircle - size(d.count) } )
+        .attr("r", function(d){ return size(d.count) })
+        .style("fill", "none")
+        .attr("stroke", "black");
+
+      // Add legend: segments
+      svg
+        .selectAll("legend")
+        .data(legend_items)
+        .enter()
+        .append("line")
+        .attr('x1', function(d){ return xCircle + size(d.count) } )
+        .attr('x2', xLabel)
+        .attr('y1', function(d){ return yCircle - size(d.count) } )
+        .attr('y2', function(d){ return yCircle - size(d.count) } )
+        .attr('stroke', 'black')
+        .style('stroke-dasharray', ('2,2'));
+      // Add legend: labels
+      svg
+        .selectAll("legend")
+        .data(legend_items)
+        .enter()
+        .append("text")
+        .attr('x', xLabel)
+        .attr('y', function(d){ return yCircle - size(d.count) } )
+        .text( function(d){ return d.count + ' : ' + d.name.toLowerCase() } )
+        .style("font-size", 14)
+        .attr('alignment-baseline', 'middle');
 
     },
     renderMap() {
