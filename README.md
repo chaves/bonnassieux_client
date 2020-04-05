@@ -1,24 +1,12 @@
-# bonnassieux_client_new
+# Interface Bonnassieux
 
-## Project setup
-```
-yarn install
-```
+Interface de gestion des numérisées issues conseil et bureau du commerce (1700-1791).
+Projet de recherche interne de [Governance Analytics](https://www.governanceanalytics.org/).
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+https://fr.wikipedia.org/wiki/Conseil_et_bureau_du_commerce_(1700-1791)
 
-### Compiles and minifies for production
-```
-yarn build
-```
+Interface interactive utilisant : [Vue.js](https://vuejs.org/), [Vuetify](https://vuetifyjs.com/) et [D3.js](https://d3js.org/)
 
-### Lints and fixes files
-```
-yarn lint
-```
+L'[API de ce projet ](https://github.com/chaves/bonnassieux_serveur) utilise [Laravel](https://laravel.com/).
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![Projet Bonnassieux](bonnassieux.png)
