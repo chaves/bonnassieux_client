@@ -1,6 +1,6 @@
 # Interface Bonnassieux
 
-Interface de gestion des numérisées issues conseil et bureau du commerce (1700-1791).
+Interface de gestion des données numérisées issues conseil et bureau du commerce (1700-1791).
 Projet de recherche interne de [Governance Analytics](https://www.governanceanalytics.org/).
 
 https://fr.wikipedia.org/wiki/Conseil_et_bureau_du_commerce_(1700-1791)
