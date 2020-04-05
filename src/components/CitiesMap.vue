@@ -28,10 +28,6 @@
         </v-col>
 
         <v-col cols="12" md="2">
-          <v-text-field
-              label="circle ratio"
-              v-model="circle_ratio"
-          ></v-text-field>
         </v-col>
       </v-row>
     </v-card-title>
@@ -66,11 +62,17 @@ export default {
       range_max: RANGE_MAX,
       range_slider: [RANGE_MIN, RANGE_MAX],
       range_bool: false,
-      range_fixed:20,
-      // circles
-      circle_ratio:10,
+      range_fixed: 5,
       // map
-      map_center: [2, 47]
+      map_center: [2, 47],
+      // domain
+      domain_min: 1,
+      domain_max: 1,
+    }
+  },
+  computed: {
+    translate: function () {
+      return [ this.svgWidth/2.2, this.svgHeight/2.3 ];
     }
   },
   mounted () {
@@ -78,8 +80,7 @@ export default {
   },
   watch: {
     'range_slider': 'updateMap',
-    'range_bool': 'updateMap',
-    'circle_ratio': 'updateMap',
+    'range_bool': 'updateMap'
   },
   methods: {
 
@@ -105,9 +106,11 @@ export default {
         long: x.longitude,
         lat: x.latitude,
         name: x.nom,
-        count: x.total,
-        size: x.total / this.circle_ratio
+        count: x.total
       }));
+      const counts = this.markers.map(x => x.count);
+      this.domain_min = Math.min(...counts);
+      this.domain_max = Math.max(...counts);
     },
 
     makeCircles() {
@@ -115,12 +118,12 @@ export default {
       const projection = d3.geoMercator()
           .center(this.map_center)
           .scale(this.scale)
-          .translate([ this.svgWidth/2.2, this.svgHeight/2.3 ]);
+          .translate(this.translate);
 
       // Add a scale for bubble size
       const size = d3.scaleLinear()
-          .domain([1,100])  // What's in the data
-          .range([ 4, 50]);  // Size in pixel
+          .domain([this.domain_min,this.domain_max])  // What's in the data
+          .range(this.map_center);  // Size in pixel
 
       // create a tooltip
       const map_container = d3.select("#map_container");
@@ -137,52 +140,54 @@ export default {
         .style("border-radius", "5px")
         .style("padding", "5px");
 
-        // Three function that change the tooltip when user hover / move / leave a cell
-        const mouseover = function() {
-            Tooltip.style("opacity", 1);
-          };
-        const mousemove = function(d) {
-            Tooltip
-              .html(d.name + "<br>" + "total: " + d.count)
-              .style("position", "absolute")
-              .style("left", (d3.mouse(this)[0]+10) + "px")
-              .style("top", (d3.mouse(this)[1]) + "px");
-          };
-        const mouseleave = function() {
-            Tooltip.style("opacity", 0)
-          };
-
         // Add circles:
         const svg = d3.select("svg");
           svg.selectAll("circle").remove();
 
-        const circles = svg.select("g")
-            .selectAll("circle")
-            .data(this.markers);
+        const circles =
+          svg.select("g")
+          .selectAll("circle")
+          .data(this.markers);
 
-        circles.enter()
-            .append("circle")
-            .attr("cx", function(d){ return projection([d.long, d.lat])[0] })
-            .attr("cy", function(d){ return projection([d.long, d.lat])[1] })
-            .attr("r", function(d){ return size(d.size) })
-            .style("fill", '#402D54')
-            .attr("stroke", '#402D54')
-            .attr("stroke-width", 1)
-            .attr("fill-opacity", .4)
-            .on("mouseover", mouseover)
-            .on("mousemove", mousemove)
-            .on("mouseleave", mouseleave);
+        circles
+          .enter()
+          .append("circle")
+          .attr("cx", function(d){ return projection([d.long, d.lat])[0] })
+          .attr("cy", function(d){ return projection([d.long, d.lat])[1] })
+          .attr("r", function(d){ return size(d.count) })
+          .style("fill", '#402D54')
+          .attr("stroke", '#402D54')
+          .attr("stroke-width", 1)
+          .attr("fill-opacity", .4)
+          .on("mouseover", function(d) {
+            Tooltip
+              .style("opacity", 1)
+              .html(d.name + "<br>" + "total: " + d.count)
+              .style("position", "absolute")
+              .style("left", (d3.mouse(this)[0]+10) + "px")
+              .style("top", (d3.mouse(this)[1]) + "px");
+              d3.select(this)
+                      .transition()
+                      .style("fill", 'red')
+                      .attr("fill-opacity", 1)
+          })
+          .on("mouseleave", function() {
+            Tooltip.style("opacity", 0);
+            d3.select(this)
+                    .transition()
+                    .style("fill", '#402D54')
+                    .attr("fill-opacity", .4)
+          });
 
     },
     renderMap() {
-
-      let projection = d3.geoMercator()
-          .center([2, 47])
-          .scale(this.scale)
-          .translate([ this.svgWidth/2.2, this.svgHeight/2.3 ]);
+      const projection = d3.geoMercator()
+              .center(this.map_center)
+              .scale(this.scale)
+              .translate(this.translate);
 
       // Le svg
-      let svg = d3.select("#map_container")
+      const svg = d3.select("#map_container")
         .append("svg")
         .attr("width", this.svgWidth)
         .attr("height", this.svgHeight);
