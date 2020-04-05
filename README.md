@@ -9,4 +9,4 @@ Interface interactive utilisant : [Vue.js](https://vuejs.org/), [Vuetify](https:
 
 L'[API de ce projet ](https://github.com/chaves/bonnassieux_serveur) utilise [Laravel](https://laravel.com/).
 
-![Projet Bonnassieux](bonnassieux.png)
+![Projet Bonnassieux](bonnassieux.gif)
