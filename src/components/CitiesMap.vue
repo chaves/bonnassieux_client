@@ -43,6 +43,7 @@ import * as d3 from "d3";
 
 const RANGE_MIN = 1700;
 const RANGE_MAX = 1792;
+const MAP_JSON = process.env.BASE_URL + 'assets/world.geojson';
 
 export default {
 
@@ -246,7 +247,7 @@ export default {
         .attr("height", this.svgHeight);
 
       // Draw the map
-      d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then(function (data) {
+      d3.json(MAP_JSON).then(function (data) {
         data.features = data.features.filter( function(d){return d.properties.name=="France"} );
         
         svg.append("g")
