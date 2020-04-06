@@ -9,6 +9,7 @@
             :max="range_max"
             thumb-label="always"
             :thumb-size="thumb_size"
+            :key="slider_key"
             class="mt-6"
           ></v-range-slider>
         </v-col>
@@ -54,6 +55,7 @@ export default {
       // slider
       markers: null,
       thumb_size: 35,
+      slider_key: 1, // to force update
       // svg
       svgWidth: 780,
       svgHeight: 760,
@@ -82,10 +84,9 @@ export default {
   },
   watch: {
     'range_slider': 'updateMap',
-    'range_bool': 'updateRange'
+    'range_bool': 'changeBool'
   },
   methods: {
-
     makeMarkers() {
       // get data years range
       const data_filtered = this.dataFetched.filter(x => (x.year >= this.range_slider[0]) && (x.year <= this.range_slider[1]));
@@ -273,25 +274,36 @@ export default {
         }).catch(err => {
           console.log(err)
         });
-
     },
+
     updateMap() {
       this.updateRange();
       this.makeMarkers();
       this.makeCircles();
       this.range_slider_tempo = this.range_slider;
     },
-    updateRange() {
-      // bouton max actionné
-      if(this.range_bool && this.range_slider[1] !== this.range_slider_tempo[1]) {
-        if (this.range_slider[1] - this.range_fixed >= this.range_min) {
-          this.range_slider[0] = this.range_slider[1] - this.range_fixed;
-        }
+
+    changeBool() {
+      if(this.range_bool) {
+        this.range_slider[0] = this.range_min;
+        this.range_slider[1] = this.range_slider[0] + this.range_fixed;
+        this.slider_key +=1; // to force update
       }
-      // bouton min actionné
-      if(this.range_bool && this.range_slider[0] !== this.range_slider_tempo[0]) {
-        if (this.range_slider[0] + this.range_fixed <= this.range_max) {
-          this.range_slider[1] = this.range_slider[0] + this.range_fixed;
+    },
+
+    updateRange() {
+      if(this.range_bool) {
+        // bouton max actionné
+        if(this.range_slider[1] !== this.range_slider_tempo[1]) {
+          if (this.range_slider[1] - this.range_fixed >= this.range_min) {
+            this.range_slider[0] = this.range_slider[1] - this.range_fixed;
+          }
+        }
+        // bouton min actionné
+        if(this.range_slider[0] !== this.range_slider_tempo[0]) {
+          if (this.range_slider[0] + this.range_fixed <= this.range_max) {
+            this.range_slider[1] = this.range_slider[0] + this.range_fixed;
+          }
         }
       }
     }
