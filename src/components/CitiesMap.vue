@@ -21,11 +21,13 @@
           ></v-switch>
         </v-col>
         <v-col cols="12" md="2">
-          <v-text-field
-              v-if="range_bool"
-              label="Range years"
-              v-model="range_fixed"
-          ></v-text-field>
+          <v-select
+                  v-if="range_bool"
+                  v-model="range_fixed"
+                  :items="range_items"
+                  label="Range years"
+                  :key="slider_key"
+          ></v-select>
         </v-col>
 
         <v-col cols="12" md="2">
@@ -67,6 +69,7 @@ export default {
       range_slider_tempo: [RANGE_MIN, RANGE_MAX],
       range_bool: false,
       range_fixed: 5,
+      range_items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30],
       // map
       map_center: [2, 47],
       // domain
@@ -84,7 +87,8 @@ export default {
   },
   watch: {
     'range_slider': 'updateMap',
-    'range_bool': 'changeBool'
+    'range_bool': 'changeRangeBool',
+    'range_fixed': 'changeRange'
   },
   methods: {
     makeMarkers() {
@@ -283,11 +287,18 @@ export default {
       this.range_slider_tempo = this.range_slider;
     },
 
-    changeBool() {
+    changeRange() {
+      this.range_slider[1] = this.range_slider[0] + this.range_fixed;
+      this.slider_key +=1; // to force update
+      this.updateMap();
+    },
+
+    changeRangeBool() {
       if(this.range_bool) {
         this.range_slider[0] = this.range_min;
         this.range_slider[1] = this.range_slider[0] + this.range_fixed;
         this.slider_key +=1; // to force update
+        this.updateMap();
       }
     },
 
