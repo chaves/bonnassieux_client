@@ -4,20 +4,20 @@
       <v-row>
         <v-col cols="12" md="6">
           <v-range-slider
-            v-model="range_slider"
-            :min="range_min"
-            :max="range_max"
-            thumb-label="always"
-            :thumb-size="thumb_size"
-            :key="slider_key"
-            class="mt-6"
+                  v-model="range_slider"
+                  :min="range_min"
+                  :max="range_max"
+                  thumb-label="always"
+                  :thumb-size="thumb_size"
+                  :key="slider_key"
+                  class="mt-6"
           ></v-range-slider>
         </v-col>
         <v-col cols="12" md="2">
           <v-switch
-              v-model="range_bool"
-              label="fixed range ?"
-              class="ml-6"
+                  v-model="range_bool"
+                  label="fixed range ?"
+                  class="ml-6"
           ></v-switch>
         </v-col>
         <v-col cols="12" md="2">
