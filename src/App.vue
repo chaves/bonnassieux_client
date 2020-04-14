@@ -37,6 +37,14 @@
             </v-list-item-content>
           </v-list-item>
 
+        <v-list-item link to="/review">
+          <v-list-item-action>
+            <v-icon>mdi-comment-multiple-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>To review</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
 
       <v-divider></v-divider>

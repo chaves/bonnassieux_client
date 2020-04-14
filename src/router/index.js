@@ -20,6 +20,11 @@ const routes = [
     props: { url: "sources/validated" },
   },
   {
+    path: "/review",
+    component: SourceListe,
+    props: { url: "sources/review" },
+  },
+  {
     path: "/cities",
     component: DictionaryCity,
     props: { url: "cities" },

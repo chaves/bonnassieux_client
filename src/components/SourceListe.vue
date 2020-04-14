@@ -13,6 +13,7 @@
               hide-details
             ></v-text-field>
           </v-card-title>
+          <pagination-sources :pagination="pagination" :page="page" @newPage="page = $event"/>
           <v-data-table 
             :headers="headers" 
             :items="sources" 
@@ -41,6 +42,17 @@
                 v-model="item.validated" 
                 v-ripple="{class: 'red--text'}"
                 v-on:change="updateValidateSource(item.id, item.validated)"
+              >
+              </v-checkbox>
+            </div>
+          </template>
+
+          <template v-slot:item.review="{ item }">
+            <div class="text-center">
+              <v-checkbox
+                      v-model="item.review"
+                      v-ripple="{class: 'red--text'}"
+                      v-on:change="updateReviewSource(item.id, item.review)"
               >
               </v-checkbox>
             </div>
@@ -176,7 +188,8 @@ export default {
         { text: "ref_id", sortable: false, value: "ref_id" },
         { text: "Date", sortable: true, value: "date", width: "110px" },
         { text: "Source", sortable: false, value: "source" },
-        { text: "Validated", sortable: false, value: "validated" }
+        { text: "Validated", sortable: false, value: "validated" },
+        { text: "To_review", sortable: false, value: "review" }
       ]
     }
   },
@@ -228,6 +241,12 @@ export default {
         .post(`sources/${id}/validate`, {'validated':validated})
         .then()
         .catch();
+    },
+    updateReviewSource(id, review) {
+      window.axios
+              .post(`sources/${id}/review`, {'review':review})
+              .then()
+              .catch();
     },
     updateRefId(id, ref_id) {
       window.axios
