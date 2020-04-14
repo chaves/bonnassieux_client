@@ -126,7 +126,6 @@
 
           </v-data-table>
         </v-card>
-        <pagination-sources :pagination="pagination" :page="page" @newPage="page = $event"/>
       </v-flex>
     </v-layout>
   </v-container>
