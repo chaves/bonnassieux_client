@@ -22,17 +22,17 @@
         itemsPerPageOptions: [200,500,1000,-1]
       }"
       dense
-      @click:row="showSources"
     >
-    <template v-slot:item.remove="{ item }">
-      <v-icon color="red" @click="remove(item)">mdi-delete</v-icon>
+    <template v-slot:item.name="{ item }">
+      <span @click="showSources(item)">{{item.name}} <v-icon color="red">mdi-magnify</v-icon></span>
+    </template>
+    <template v-slot:item.remove="">
     </template>
     </v-data-table>
 
     <v-row justify="center">
       <v-dialog v-model="dialog" scrollable>
-        <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+        <template v-slot:activator="">
         </template>
         <v-card>
           <v-card-title><strong>{{selectedDictItem}}</strong>...<a @click="dialog = false">close</a></v-card-title>
@@ -65,8 +65,8 @@ export default {
       sources: [],
       search: '',
       item: '',
-      dialog: false,
       selectedDictItem: '',
+      showDialogButton: false,
       rules: {
       required: value => !!value || 'Required.'
       }
